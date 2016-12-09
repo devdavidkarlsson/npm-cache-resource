@@ -1,23 +1,22 @@
-FROM mhart/alpine-node:6
+# https://github.com/ymedlop-sandbox/npm-cache-resource
+FROM node:latest
 
-MAINTAINER Yeray Medina López <ymedlop@gmail.com>
+MAINTAINER The Oasis Team
 
-RUN apk add --update \
-    openssl \
-    sed \
-    ca-certificates \
-    bash \
-    openssh \
-    make \
-    git \
-    jq \
-    libstdc++ \
-    libpng-dev \
-    nasm \
-    build-base \
-    python \
-    python-dev \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && \
+    apt-get install -y \
+        openssl \
+        sed \
+        ca-certificates \
+        bash \
+        make \
+        git \
+        jq \
+        libpng-dev \
+        nasm \
+        python \
+        python-dev \
+        unzip
 
 # according to Brian Clements, can't `git pull` unless we set these
 RUN git config --global user.email "git@localhost" && \
@@ -36,6 +35,3 @@ ADD assets/ /opt/resource/
 RUN mkdir /var/cache/git
 
 RUN chmod +x /opt/resource/check /opt/resource/in /opt/resource/out
-
-# install npm-clip-login to help us with the npm login
-RUN npm install -g npm-cli-login
