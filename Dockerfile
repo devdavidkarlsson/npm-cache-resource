@@ -3,6 +3,22 @@ FROM node:latest
 
 MAINTAINER The Oasis Team
 
+# RUN apk add --update \
+#     openssl \
+#     sed \
+#     ca-certificates \
+#     bash \
+#     openssh \
+#     make \
+#     git \
+#     jq \
+#     libstdc++ \
+#     libpng-dev \
+#     nasm \
+#     build-base \
+#     python \
+#     python-dev \
+#   && rm -rf /var/cache/apk/*
 RUN apt-get update && \
     apt-get install -y \
         openssl \
